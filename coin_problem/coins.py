@@ -2,6 +2,7 @@
 import time
 
 
+# 动态规划，自顶向下解决凑领钱的问题
 def coin_combine(coins, amount):
     """
     :param coins: a list, contain coins type, for example: [1, 2, 5]
@@ -29,11 +30,32 @@ def coin_combine(coins, amount):
     return dp(amount)
 
 
-if __name__ == '__main__':
+# 动态规划，自底向上解决凑领钱的问题
+def coins_combine(coins_list, amount):
+    """
+    des see function coin_combine's func_doc
+    """
+    dp = [amount+1] * (amount + 1)
+    dp[0] = 0
 
-    import sys
-    sys.setrecursionlimit(10000)
+    for i in range(len(dp)):
+        for coin in coins_list:
+            if i - coin < 0:
+                continue
+            else:
+                dp[i] = min(dp[i], 1 + dp[i - coin])
+    return -1 if dp[amount] == amount + 1 else dp[amount]
+
+
+if __name__ == '__main__':
+    # print coin_combine.func_doc
+    # import sys
+    # sys.setrecursionlimit(10000)
 
     start = time.time()
-    print coin_combine([1, 2, 5, 10], 1000)
+    print coin_combine([1, 2, 5, 10], 100)
     print time.time() - start
+
+    start1 = time.time()
+    print coins_combine([1, 2, 5], 100)
+    print time.time() - start1

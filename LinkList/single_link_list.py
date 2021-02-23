@@ -98,3 +98,14 @@ if __name__ == '__main__':
     # 从头遍历链表并打印
     for i in link_list.items():
         print i
+
+    # 前序遍历二叉树（递归的方式）
+    node1 = TreeNode(1)
+    node2 = TreeNode(2)
+    node3 = TreeNode(3)
+    node1.left = None
+    node1.right = node2
+    node2.left = node3
+
+    pre_order = Solution()
+    print pre_order.pre_order_traversal(node1)

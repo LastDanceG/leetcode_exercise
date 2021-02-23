@@ -90,5 +90,11 @@ class Solution(object):
 
 if __name__ == '__main__':
 
-    r = list(range(11))
-    print r
+    # 从尾部为链表增加元素
+    link_list = LinkListOpt()
+    for i in range(1, 11):
+        link_list.append(i)
+
+    # 从头遍历链表并打印
+    for i in link_list.items():
+        print i

@@ -47,6 +47,20 @@ def coins_combine(coins_list, amount):
     return -1 if dp[amount] == amount + 1 else dp[amount]
 
 
+def coin_combine2(coins, amount):
+
+    dp = [amount+1] * (amount + 1)
+    dp[0] = 0
+
+    for i in range(len(dp)):
+        for coin in coins:
+            if i - coin < 0:
+                continue
+            else:
+                dp[i] = min(dp[i], 1 + dp[i-coin])
+    return -1 if dp[amount] == amount + 1 else dp[amount]
+
+
 if __name__ == '__main__':
 
     start = time.time()
@@ -54,5 +68,5 @@ if __name__ == '__main__':
     print time.time() - start
 
     start1 = time.time()
-    print coins_combine([1, 2, 5], 100)
+    print coin_combine2([1, 2, 5, 10], 10000)
     print time.time() - start1

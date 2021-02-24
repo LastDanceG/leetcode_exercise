@@ -48,9 +48,6 @@ def coins_combine(coins_list, amount):
 
 
 if __name__ == '__main__':
-    # print coin_combine.func_doc
-    # import sys
-    # sys.setrecursionlimit(10000)
 
     start = time.time()
     print coin_combine([1, 2, 5, 10], 100)

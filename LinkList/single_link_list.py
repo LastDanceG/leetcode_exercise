@@ -62,6 +62,39 @@ class LinkListOpt(object):
                 cur = cur.next
             cur.next = node
 
+    def find(self, val):
+
+        return val in self.items()
+
+    def remove(self, val):
+
+        cur = self.head
+        pre = None
+        while cur is not None:
+            if cur.val == val:
+                if not pre:
+                    self.head = cur.next
+                else:
+                    pre.next = cur.next
+                return True
+            else:
+                pre = cur
+                cur = cur.next
+
+    def insert(self, val, index):
+
+        if index <= 0:
+            self.add(val)
+        elif index >= self.length():
+            self.append(val)
+        else:
+            node = Node(val)
+            cur = self.head
+            for i in range(index-1):
+                cur = cur.next
+            node.next = cur.next
+            cur.next = node
+
 
 class TreeNode(object):
 
@@ -96,16 +129,8 @@ if __name__ == '__main__':
         link_list.append(i)
 
     # 从头遍历链表并打印
-    for i in link_list.items():
-        print i
+    # for i in link_list.items():
+    #     print i
+    print link_list.insert(100, 1)
+    print link_list.traverse(link_list.head)
 
-    # 前序遍历二叉树（递归的方式）
-    node1 = TreeNode(1)
-    node2 = TreeNode(2)
-    node3 = TreeNode(3)
-    node1.left = None
-    node1.right = node2
-    node2.left = node3
-
-    pre_order = Solution()
-    print pre_order.pre_order_traversal(node1)

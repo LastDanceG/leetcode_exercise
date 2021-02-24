@@ -56,13 +56,3 @@ if __name__ == '__main__':
     for i in range(1, 50):
         print(fib2(i), end=',')
     print(time.time() - start)
-
-    start = time.time()
-    for i in range(1, 50):
-        print(fib(i), end=',')
-    print(time.time() - start)
-
-    start = time.time()
-    for i in range(1, 50):
-        print(fib3(i), end=',')
-    print(time.time() - start)

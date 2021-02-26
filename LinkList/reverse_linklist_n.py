@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 反转链表的前n个节点
+给定一个区间[m, n],只反转区间内的链表元素
 """
 
 
@@ -119,7 +120,14 @@ class ReverseLinkList(object):
         return last
 
     def reverse_link_list_between(self, head, m, n):
-        pass
+        """
+        给定一个区间[m, n],只反转区间内的链表元素
+        """
+        if m == 1:
+            return self.reverse_link_list_top_n(head, n)
+        else:
+            head.next = self.reverse_link_list_between(head.next, m - 1, n - 1)
+            return head
 
 
 if __name__ == '__main__':
@@ -131,11 +139,11 @@ if __name__ == '__main__':
 
     # link_list.insert('a', 3)
 
-    # print item(link_list.head)
+    print item(link_list.head)
 
     # print item(recursion_reverse_all_link_list(link_list.head))
 
-    print item(ReverseLinkList().reverse_link_list_top_n(link_list.head, 3))
+    print item(ReverseLinkList().reverse_link_list_between(link_list.head, 2, 4))
 
 
 

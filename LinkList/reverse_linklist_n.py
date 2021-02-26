@@ -3,6 +3,7 @@
 反转链表的前n个节点
 给定一个区间[m, n],只反转区间内的链表元素
 """
+from copy import deepcopy
 
 
 class Node(object):
@@ -139,11 +140,19 @@ if __name__ == '__main__':
 
     # link_list.insert('a', 3)
 
+    a = deepcopy(link_list)
+    b = deepcopy(link_list)
+
+    # 以列表的形式打印链表元素
     print item(link_list.head)
 
     # print item(recursion_reverse_all_link_list(link_list.head))
 
-    print item(ReverseLinkList().reverse_link_list_between(link_list.head, 2, 4))
+    # 反转给定区间的链表元素
+    print item(ReverseLinkList().reverse_link_list_top_n(a.head, 3))
+
+    # 反转给定区间的链表元素
+    print item(ReverseLinkList().reverse_link_list_between(b.head, 2, 3))
 
 
 

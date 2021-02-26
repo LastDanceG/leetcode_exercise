@@ -16,6 +16,25 @@ class Node(object):
     #     return '%s' % self.val
 
 
+def iteration_reverse(head):
+
+    # 申请两个节点，并初始化，cur为当前节点，即头节点，pre指向None
+    cur = head
+    pre = None
+
+    # 遍历链表
+    while cur is not None:
+
+        # 将当前节点的下一个节点指向tmp
+        tmp = cur.next
+        # 然后将当前节点的next指向pre
+        cur.next = pre
+        # 当前节点赋值给pre，当前节点后移一位，即pre和cur都前进一位
+        pre = cur
+        cur = tmp
+    return pre
+
+
 class LinkList(object):
 
     def __init__(self):
@@ -45,9 +64,10 @@ class LinkList(object):
                 cur = cur.next
             cur.next = _node
 
-    def items(self):
+    @staticmethod
+    def items(head):
 
-        cur = self.head
+        cur = head
         while cur is not None:
             yield cur.val
             cur = cur.next
@@ -59,6 +79,21 @@ class LinkList(object):
         res = self.traversal(head.next)
         res.append(head.val)
         return res
+
+    def reverse(self, head):
+        # base case，递归的终止条件：当前节点为空或者下一个节点为空
+        if head is None or head.next is None:
+            return head
+
+        # 如果链表是1->2->3->4->5，则此时的last为5，head=4，
+        # 因此head.next.next=head。就相当于5.next=4，即5->4
+        last = self.reverse(head.next)
+        head.next.next = head
+        # 防止链表循环，需要将head.next设置成空
+        head.next = None
+
+        # 每层递归函数返回的都是last，也就是最后一个节点5
+        return last
 
     def find(self, val):
 
@@ -110,12 +145,17 @@ class LinkList(object):
 if __name__ == '__main__':
 
     link_list = LinkList()
-    for i in range(1, 6):
+    for i in range(0):
         link_list.append(i)
 
-    link_list.add(0)
+    # link_list.add(0)
 
     # print link_list.remove(0)
-    print link_list.insert('a', 1)
+    # print link_list.insert('a', 1)
 
-    print link_list.traversal(link_list.head)
+    for i in link_list.items(link_list.head):
+        print i
+    print "=" * 20
+    for i in link_list.items(iteration_reverse(link_list.head)):
+        print i
+

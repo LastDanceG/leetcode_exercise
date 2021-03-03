@@ -73,35 +73,58 @@ class LinkList(object):
 
 
 class ReverseLinkList(object):
-    pass
 
+    def __init__(self):
+        self.successor = None
 
-def reverse_link_list_all(head):
-    """
-    反转整个链表
-    """
-    if head is None or head.next is None:
-        return head
-    last = reverse_link_list_all(head.next)
-    head.next.next = head
-    head.next = None
-    return last
+    def reverse_link_top_n(self, head, n):
+        """
+        反转链表的前n个
+        """
+        if n == 1:
+            self.successor = head.next
+            return head
+        last = self.reverse_link_top_n(head.next, n-1)
+        head.next.next = head
+        head.next = self.successor
+        return last
+
+    def reverse_link_list_all(self, head):
+        """
+        反转整个链表
+        """
+        if head is None or head.next is None:
+            return head
+        last = self.reverse_link_list_all(head.next)
+        head.next.next = head
+        head.next = None
+        return last
+
+    def reverse_link_list_between(self, head, m, n):
+        """
+        反转给定区间内的链表
+        """
+        if m == 1:
+            return self.reverse_link_top_n(head, n)
+        else:
+            head.next = self.reverse_link_list_between(head.next, m - 1, n - 1)
+            return head
 
 
 if __name__ == '__main__':
 
     link_list = LinkList()
 
-    for i in range(1, 6):
+    for i in range(1, 11):
 
         link_list.append(i)
 
-    link_list.insert(100, 2)
+    # link_list.insert(100, 2)
 
-    print link_list.find(5)
+    # print link_list.find(5)
 
     for i in link_list.item(link_list.head):
         print i,
     print '\n'
-    for j in link_list.item(reverse_link_list_all(link_list.head)):
+    for j in link_list.item(ReverseLinkList().reverse_link_list_between(link_list.head, 1, 3)):
         print j,

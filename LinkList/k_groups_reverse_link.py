@@ -96,7 +96,7 @@ if __name__ == '__main__':
 
         link_list.append(i)
 
-    # link_list.insert(100, 2)
+    link_list.insert(100, 2)
 
     print link_list.find(5)
 
